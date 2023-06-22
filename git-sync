@@ -15,9 +15,11 @@
 # limitations under the License.
 
 echo "Synching upstream remote with origin"
-git stash
+GIT_STASH_MESSAGE="${RANDOM}"
+git stash push -m "{GIT_STASH_MESSAGE}"
 git checkout main
 git pull upstream main --ff-only
 git push origin main
 git switch -
-git stash pop 0
+git stash list | grep "${GIT_STASH_MESSAGE}" && git stash pop 0 --index
+exit 0
