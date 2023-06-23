@@ -13,7 +13,6 @@ git remote add origin <the URL to your forked repo>
 ```
 
 3. The main branch is named `main`.
-   
 `git sync` will stash any changes you have on your current branch, checkout `main`, sync it with upstream and with your fork, and then switch back to your current branch and pop off of the stash to restore your working tree and index.
 
 ## Installation
