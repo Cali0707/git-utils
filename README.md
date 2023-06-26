@@ -4,6 +4,7 @@ A collection of useful git tools. Currently the only tool here is a git command 
 ### Usage
 The `git sync` command can be used by running `git sync` in any git repository which meets the following requirements:
 1. There is a remote named `upsteam` which is your upstream repository.
+If there isn't, you can add it by doing:
 ```sh
 git remote add upstream <the URL to the upstream repo>
 ```
