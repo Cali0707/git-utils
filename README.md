@@ -9,6 +9,7 @@ git remote add upstream <the URL to the upstream repo>
 ```
 
 2. There is a remote named `origin` which is your fork that you would like to sync with upstream.
+If there isn't, you can add it by doing:
 ```sh
 git remote add origin <the URL to your forked repo>
 ```
