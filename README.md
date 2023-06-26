@@ -22,7 +22,7 @@ where `{DIRECTORY_OF_CHOICE}` is for example `/usr/bin`.
 ## Git Clone Fork
 Note: this commend currently only works with github repositories!
 ### Usage
-The `git clonefork` can be used by running `git sync {REMOTE_ORIGIN_URL}` where `{REMOTE_ORIGIN_URL}` is:
+The `git clonefork` can be used by running `git clonefork {REMOTE_ORIGIN_URL}` where `{REMOTE_ORIGIN_URL}` is:
 1. The remote url for your fork of a repository. You must first create the fork in the Github UI, then in your fork click on the "Code" button and copy the url.
 ### Installation
 The `git-sync` command needs `jq` installed. To check if it is installed you can run:
