@@ -33,7 +33,7 @@ ln -s "$(pwd)/git-sync" {DIRECTORY_OF_CHOICE}/git-sync
 ```
 where `{DIRECTORY_OF_CHOICE}` is for example `/usr/bin`.
 ## Git Clone Fork
-Note: this commend currently only works with github repositories!
+Note: this command currently only works with github repositories!
 ### Usage
 The `git clonefork` can be used by running `git clonefork {REMOTE_ORIGIN_URL}` where `{REMOTE_ORIGIN_URL}` is:
 1. The remote url for your fork of a repository. You must first create the fork in the Github UI, then in your fork click on the "Code" button and copy the url.
