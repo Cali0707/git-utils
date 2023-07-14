@@ -15,11 +15,12 @@
 # limitations under the License.
 
 echo "Synching upstream remote with origin"
+BRANCH="$(git ls-remote --symref origin HEAD | grep ref: | sed 's/^ref: refs\/heads\/\(.*\)[[:space:]]HEAD$/\1/')"
 GIT_STASH_MESSAGE="${RANDOM}"
-git stash push -m "{GIT_STASH_MESSAGE}"
-git checkout main
-git pull upstream main --ff-only
-git push origin main
+git stash push -m "${GIT_STASH_MESSAGE}"
+git checkout "${BRANCH}"
+git pull upstream "${BRANCH}" --ff-only
+git push origin "${BRANCH}" 
 git switch -
 git stash list | grep "${GIT_STASH_MESSAGE}" && git stash pop 0 --index
 exit 0

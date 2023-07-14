@@ -18,8 +18,10 @@ If there isn't, you can add it by doing:
 git remote add origin <the URL to your forked repo>
 ```
 
-3. The main branch is named `main`.
-`git sync` will stash any changes you have on your current branch, checkout `main`, sync it with upstream and with your fork, and then switch back to your current branch and pop off of the stash to restore your working tree and index.
+3. Both your git client and the git installed on your remotes support `git ls-remote --symref` (most do, just a very old version might not).
+
+`git sync` will stash any changes you have on your current branch, checkout the local branch which is `HEAD` (aka the main branch) on the upstream remote, 
+sync it with upstream and with your fork, and then switch back to your current branch and pop off of the stash to restore your working tree and index.
 
 ## Git Clone Fork
 Note: this command currently only works with github repositories!
