@@ -18,7 +18,12 @@ echo "Synching upstream remote with origin"
 BRANCH="$(git ls-remote --symref origin HEAD | grep ref: | sed 's/^ref: refs\/heads\/\(.*\)[[:space:]]HEAD$/\1/')"
 GIT_STASH_MESSAGE="${RANDOM}"
 git stash push -m "${GIT_STASH_MESSAGE}"
-git checkout "${BRANCH}"
+if [[ -z "$(git branch -l ${BRANCH})" ]] 
+then
+    git checkout --track "origin/${BRANCH}"
+else
+    git checkout "${BRANCH}"
+fi
 git pull upstream "${BRANCH}" --ff-only
 git push origin "${BRANCH}" 
 git switch -
