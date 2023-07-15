@@ -39,6 +39,9 @@ if [[ ":$PATH:" == *":$HOME/bin:"* ]]; then
   echo "Your path is correctly set"
 else
   echo "Your path is missing ~/bin, you might want to add it."
+  echo "If you use bash, add 'export PATH=\"\${PATH}:\${HOME}/bin\"' to your .bashrc file"
+  echo "If you use zsh, add 'export PATH=\"\${PATH}:\${HOME}/bin\"' to your .zshrc file"
+  echo "If you use fish, add 'fish_add_path -m ~/bin' to your config.fish file"
   exit 1
 fi
 
