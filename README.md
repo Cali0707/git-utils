@@ -1,7 +1,7 @@
 # git-utils
 A collection of useful git tools. Currently the only tool here is a git command to sync an upstream repository with your local copy and your fork.
 
-> :warning: **If you are not on Linux**: these scripts have only been tested on Linux so far. Please open an issue if you find any compatibility problems.
+> :warning: **If you are not on Linux/MacOS**: these scripts have only been tested on Linux and MacOS so far. Please open an issue if you find any compatibility problems.
 
 ## Git Sync
 ### Usage

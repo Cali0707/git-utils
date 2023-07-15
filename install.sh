@@ -18,9 +18,18 @@ function install_git_util_command() {
     ln -s "$(pwd)/$1" "${HOME}/bin/$1"
 }
 
+function check_git_util_dep_installed() {
+    if ! command -v "$1" &> /dev/null
+    then
+        echo "$1 is a dependency for $2. Please install it before installing $2"
+        return 1
+    fi
+    return 0
+}
+
 while getopts "n:" flag; do
-    case '${flag}' in 
-        n) NAME=${OPTARG} ;;
+    case "${flag}" in 
+        n) NAME="${OPTARG}" ;;
         ?) printf "Usage: %s: [-n name_of_command_to_install]\n" $0
             exit 2;;
     esac
@@ -36,9 +45,9 @@ fi
 mkdir -p "${HOME}/bin"
 
 if [[ -z "$NAME" || "$NAME" = "git-sync" ]]; then
-    install_git_util_command "git-sync"
+    install_git_util_command "git-sync" && echo "installed git_sync"
 fi
 
-if [[ -z "$NAME" || "$NAME" = "git-clonefork" ]]; then
-   install_git_util_command "git-clonefork" 
+if [[ (-z "$NAME" || "$NAME" = "git-clonefork") ]]; then
+    check_git_util_dep_installed "jq" "git-clonefork" && install_git_util_command "git-clonefork" && echo "intalled git_clonefork"
 fi
