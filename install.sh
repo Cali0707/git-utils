@@ -35,8 +35,6 @@ while getopts "n:" flag; do
     esac
 done
 
-echo "$NAME"
-
 if [[ ":$PATH:" == *":$HOME/bin:"* ]]; then
   echo "Your path is correctly set"
 else
