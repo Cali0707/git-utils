@@ -43,7 +43,13 @@ else
 	UPSTREAM_ORIGIN=$(echo $REPO_DATA | jq -r .parent.ssh_url)
 fi
 
-git clone $GIT_ORIGIN
-cd $REPO_DIRECTORY
-git remote add upstream $UPSTREAM_ORIGIN
-git remote set-url --push upstream no_push
+if ! git clone $GIT_ORIGIN 2>/dev/null
+then
+    echo "Failed to clone the repository. Please use a valid url pointing to your fork"
+    echo "Usage: git clonefork <fork_url>"
+    exit 1
+else
+    cd $REPO_DIRECTORY
+    git remote add upstream $UPSTREAM_ORIGIN
+    git remote set-url --push upstream no_push
+fi
