@@ -37,7 +37,7 @@ use `./install.sh -n <name_of_util`. For example, to install `git-sync` only, yo
 
 ## Troubleshooting
 
-### How to set up an SSH Key with your VCS
+### How to set up an SSH Key with your GitHub/GitLab
 1. Setting up an SSH Key with GitHub: https://docs.github.com/authentication
 
 2. Setting up an SSH Key with GitLab: https://docs.gitlab.com/ee/user/ssh.html
