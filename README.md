@@ -33,3 +33,12 @@ The `git clonefork` can be used by running `git clonefork {REMOTE_ORIGIN_URL}` w
 ## Installation
 To install the utils, use the `./install.sh` script provided in this repo. If you would like to specify which util to install rather than install all of them, you can
 use `./install.sh -n <name_of_util`. For example, to install `git-sync` only, you could run `./install.sh -n git-sync`.
+
+
+## Troubleshooting
+
+### How to set up an SSH Key with your GitHub/GitLab
+1. Setting up an SSH Key with GitHub: https://docs.github.com/authentication
+
+2. Setting up an SSH Key with GitLab: https://docs.gitlab.com/ee/user/ssh.html
+
