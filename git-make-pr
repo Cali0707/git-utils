@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+# Copyright 2023 Calum Murray
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+case "$(uname -sr)" in 
+    Darwin*)
+        USE_OPEN=true
+        ;;
+    Linux*)
+        USE_XDG_OPEN=true
+        ;;
+    *)
+        ;;
+esac
+
+if git remote | grep -q upstream
+then
+    REMOTE=$(git remote get-url upstream)
+else
+    REMOTE=$(git remote get-url origin)
+fi
+
+if $DEBUG
+then
+    echo $REMOTE
+fi
+
+BASE_URL=$(echo $REMOTE | sed -r 's:git@([^/]+)\:(.*)\.git:https\://\1/\2:g')
+
+if $DEBUG
+then
+    echo $BASE_URL
+fi
+
+TRACKING_BRANCH=$(git for-each-ref --format='%(upstream:short)' "$(git symbolic-ref -q HEAD)" | sed -r 's:(.+)/(.*):\2:g')
+if [[ -z $TRACKING_BRANCH ]]
+then
+    git push -u origin $(git branch --show-current)
+    TRACKING_BRANCH="origin/$(git branch --show-current)"
+else
+    # still want to push any existing commits on our branch
+    git push
+fi
+if $DEBUG
+then
+    echo $TRACKING_BRANCH
+fi
+
+PULL_URL="$BASE_URL/compare/main...$TRACKING_BRANCH?quick_pull=1"
+if USE_OPEN
+then
+    open $PULL_URL
+elif USE_XDG_OPEN
+then
+    xdg-open $PULL_URL
+else
+    echo $PULL_URL
+fi
