@@ -59,10 +59,10 @@ then
 fi
 
 PULL_URL="$BASE_URL/compare/main...$TRACKING_BRANCH?quick_pull=1"
-if USE_OPEN
+if $USE_OPEN
 then
     open $PULL_URL
-elif USE_XDG_OPEN
+elif $USE_XDG_OPEN
 then
     xdg-open $PULL_URL
 else
