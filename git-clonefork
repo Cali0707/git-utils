@@ -23,6 +23,16 @@ fi
 GIT_ORIGIN=$1
 # get the name of the directory that will be created when we clone
 REPO_DIRECTORY=$(basename $GIT_ORIGIN .git)
+
+# check if the directory already exists
+
+if [ -d "$(pwd)/$REPO_DIRECTORY" ]; then
+    echo "A directory with name $REPO_DIRECTORY already exists in your current working directory."
+    echo "Please move, rename, or delete this directory before using git clonefork in your current working directory"
+    echo "usage: git clonefork <fork_url>"
+    exit 1
+fi
+
 # reformat the repo url into a github api request
 GITHUB_API_URL=$(echo $GIT_ORIGIN | sed -r 's/.*(\@|\/\/)(.*)(\:|\/)([^:\/]*)\/([^\/\.]*)\.git/https:\/\/api.github.com\/repos\/\4\/\5/')
 
