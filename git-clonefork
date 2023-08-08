@@ -14,15 +14,52 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-GIT_ORIGIN=$1
-REPO_DIRECTORY=$(basename $GIT_ORIGIN .git)
-GITHUB_API_URL=$(echo $GIT_ORIGIN | sed -r 's/.*(\@|\/\/)(.*)(\:|\/)([^:\/]*)\/([^\/\.]*)\.git/https:\/\/api.github.com\/repos\/\4\/\5/')
-if grep -Eiq "^https?://" <<<$GIT_ORIGIN; then
-	UPSTREAM_ORIGIN=$(curl -s $GITHUB_API_URL | jq -r .parent.clone_url)
-else
-	UPSTREAM_ORIGIN=$(curl -s $GITHUB_API_URL | jq -r .parent.ssh_url)
+if [[ -z $1 ]]; then
+    echo "Please provide a fork url"
+    echo "usage: git clonefork <fork_url>"
+    exit 2
 fi
-git clone $GIT_ORIGIN
-cd $REPO_DIRECTORY
-git remote add upstream $UPSTREAM_ORIGIN
-git remote set-url --push upstream no_push
+
+GIT_ORIGIN=$1
+# get the name of the directory that will be created when we clone
+REPO_DIRECTORY=$(basename $GIT_ORIGIN .git)
+
+# check if the directory already exists
+
+if [ -d "$(pwd)/$REPO_DIRECTORY" ]; then
+    echo "A directory with name $REPO_DIRECTORY already exists in your current working directory."
+    echo "Please move, rename, or delete this directory before using git clonefork in your current working directory"
+    echo "usage: git clonefork <fork_url>"
+    exit 1
+fi
+
+# reformat the repo url into a github api request
+GITHUB_API_URL=$(echo $GIT_ORIGIN | sed -r 's/.*(\@|\/\/)(.*)(\:|\/)([^:\/]*)\/([^\/\.]*)\.git/https:\/\/api.github.com\/repos\/\4\/\5/')
+
+# make the api request and validate we get a good response
+# -f makes curl fail silently, so REPO_DATA will be null on failure
+REPO_DATA=$(curl -fs $GITHUB_API_URL)
+if [[ -z $REPO_DATA ]]; then
+    echo "Please provide a valid fork url"
+    echo "usage: git clonefork <fork_url>"
+    exit 2
+fi
+
+if grep -Eiq "^https?://" <<<$GIT_ORIGIN; then
+    # we aren't cloning with ssh, use the default parent clone_url
+	UPSTREAM_ORIGIN=$(echo $REPO_DATA | jq -r .parent.clone_url)
+else
+    # we want to clone with ssh
+	UPSTREAM_ORIGIN=$(echo $REPO_DATA | jq -r .parent.ssh_url)
+fi
+
+if ! git clone $GIT_ORIGIN 2>/dev/null
+then
+    echo "Failed to clone the repository. Please use a valid url pointing to your fork"
+    echo "Usage: git clonefork <fork_url>"
+    exit 1
+else
+    cd $REPO_DIRECTORY
+    git remote add upstream $UPSTREAM_ORIGIN
+    git remote set-url --push upstream no_push
+fi
