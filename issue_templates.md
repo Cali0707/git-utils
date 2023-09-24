@@ -125,20 +125,3 @@ labels: 'improvement'
 [Add any other context or screenshots about the improvement suggestion here.]
 
 
-
-# Question
-name: Questions to the Community
-
-about: Ask the community a question about the project
-
-title: "[QUESTION]"
-
-labels: 'question'
-
-**Your Question**
-
-[A clear and concise description of your question.]
-
-**Describe any context or related information**
-
-[Add any context or related information that would help in understanding or answering your question.]
