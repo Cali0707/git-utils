@@ -49,15 +49,13 @@ Steps to reproduce the behavior:
 
 [A clear and concise description of what you expected to happen.]
 
-**Screenshots**
+**Error Log**
 
-[If applicable, add screenshots to help explain your problem.]
+[Please copy and paste your error or logs here.]
 
 **Environment (please complete the following information):**
 - OS: [e.g. Fedora, RHEL, CentOS, Ubuntu, Debian, Windows, MacOS, Linux]
-- Browser [e.g. chrome, safari]
-- Version [e.g. 22]
-
+- Shell you are using: [e.g. zsh, bash, fish]
 **Additional context**
 
 [Add any other context about the problem here.]
@@ -89,16 +87,16 @@ Steps to reproduce the behavior:
 
 **Environment (please complete the following information):**
 - OS: [e.g. Windows, MacOS, Linux]
-- Browser [e.g. chrome, safari, edge]
+- Shell you are using: [e.g. zsh, bash, fish]
 - Version [e.g. 22]
 
 **Expected behavior on this environment**
 
 [A clear and concise description of what you expected to happen]
 
-**Screenshots**
+**Error Log**
 
-[If applicable, add screenshots to help explain your problem]
+[Please copy and paste your error or logs here.]
 
 **Additional context**
 
