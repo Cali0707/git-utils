@@ -54,3 +54,7 @@ fi
 if [[ (-z "$NAME" || "$NAME" = "git-clonefork") ]]; then
     check_git_util_dep_installed "jq" "git-clonefork" && install_git_util_command "git-clonefork" && echo "intalled git_clonefork"
 fi
+
+if [[ (-z "$NAME" || "$NAME" = "csm") ]]; then
+    git config --global alias.csm "commit -s -m"
+fi
